@@ -9,7 +9,7 @@ class IPStreamer:
         self.timeout = timeout
 
         self.sock = None
-        self.mu = threading.Lock()
+        self.mu = threading.RLock()
         self.file = None
 
     def connect(self):
@@ -45,5 +45,19 @@ class IPStreamer:
         """Permet de réessayer de se connecter à la connexion TCP/IP"""
         pass
 
-    def send(self, data:str):
+    def write(self, cmd: str) -> str:
+        if not cmd.endswith("\r"):
+            cmd += "\r"
+        with self.mu:
+            try:
+                self.sock.sendall(cmd.encode("ascii"))
+                print(f"Message sent: {cmd.strip()}")
+                resp = self.file.readline()
+                if resp == "":
+                    raise RuntimeError("Socket closed by remote host")
+                return resp.strip()
+            except (socket.timeout, ConnectionResetError) as e:
+                raise RuntimeError("Network error during write") from e
+
+    def read(self):
         pass
