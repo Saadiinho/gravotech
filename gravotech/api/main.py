@@ -1,11 +1,27 @@
+from typing import Optional
+from fastapi import FastAPI, HTTPException
+
 from gravotech.core.gravotech import Gravotech
 
-__version__ = "1.0.0"
+graveuse = Optional[Gravotech]
 
-HOST = "127.0.0.1"
-PORT = 3000
+IP="127.0.0.1"
+PORT=3000
 
-graveuse = Gravotech(HOST, PORT)
+async def lifespan(app: FastAPI):
+    app.state.graveuse = Gravotech(ip=IP, port=PORT)
+    yield
+    graveuse.Streamer.close()
+app = FastAPI(lifespan=lifespan, title="Gravotech")
 
-if __name__ == "__main__":
-    print(graveuse.Actions.ls())
+@app.post("/st")
+def st():
+    if graveuse is None:
+        raise HTTPException(status_code=400, detail="Not connected to Gravotech")
+
+    try:
+        resp = graveuse.Actions.st()
+        return resp
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
