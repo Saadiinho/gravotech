@@ -19,7 +19,7 @@ class IPStreamer:
             self.sock.settimeout(10)
             self.sock.connect((self.ip, self.port))
             self.sock.settimeout(self.timeout)
-            self.file = self.sock.makefile("r", encoding="ascii", newline="\n")
+            self.file = self.sock.makefile("r", encoding="ascii")
             print("Connected to {}:{}".format(self.ip, self.port))
         except Exception as e:
             self.close()
@@ -51,11 +51,9 @@ class IPStreamer:
         with self.mu:
             try:
                 self.sock.sendall(cmd.encode("ascii"))
-                print(f"Message sent: {cmd.strip()}")
+                print(f"Message sent: {cmd}")
                 resp = self.file.readline()
-                if resp == "":
-                    raise RuntimeError("Socket closed by remote host")
-                return resp.strip()
+                print(f"Message received: {resp.strip()}")
             except (socket.timeout, ConnectionResetError) as e:
                 raise RuntimeError("Network error during write") from e
 
