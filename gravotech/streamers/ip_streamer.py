@@ -51,11 +51,17 @@ class IPStreamer:
         with self.mu:
             try:
                 self.sock.sendall(cmd.encode("ascii"))
-                print(f"Message sent: {cmd}")
-                resp = self.file.readline()
-                print(f"Message received: {resp.strip()}")
             except (socket.timeout, ConnectionResetError) as e:
                 raise RuntimeError("Network error during write") from e
+        return self.read()
+
 
     def read(self):
-        pass
+        with self.mu:
+            if self.file is None:
+                raise RuntimeError("Not connected")
+            resp = self.file.readline()
+            if not resp:
+                raise RuntimeError("Connection closed by remote host")
+            return resp.strip()
+

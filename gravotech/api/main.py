@@ -12,6 +12,6 @@ ip_streamer = IPStreamer(HOST, PORT)
 if __name__ == "__main__":
     ip_streamer.connect()
     sleep(2)
-    ip_streamer.write(f"ST\r")
+    print(ip_streamer.write(f"ST\r"))
     sleep(2)
     ip_streamer.close()
