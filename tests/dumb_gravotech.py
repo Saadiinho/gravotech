@@ -11,7 +11,6 @@ def handle_client(conn, addr):
     print(f"✅ Client connecté : {addr}")
     with conn:
         while True:
-            # Lire caractère par caractère jusqu'à \r
             buffer = b""
             while True:
                 try:
@@ -26,7 +25,6 @@ def handle_client(conn, addr):
                     print("❌ Erreur de lecture")
                     return
 
-            # Décoder la commande (ASCII uniquement selon la doc)
             try:
                 cmd_str = buffer.decode("ascii").rstrip("\r")
             except UnicodeDecodeError:
@@ -35,7 +33,6 @@ def handle_client(conn, addr):
 
             print(f"📥 Reçu : {repr(cmd_str)}")
 
-            # Traitement des commandes
             if cmd_str == "ST":
                 resp = "ST 4 0 0\r\n"
             elif cmd_str.startswith("LS"):
@@ -44,7 +41,7 @@ def handle_client(conn, addr):
                 conn.sendall(b"GO M\r\n")
                 time.sleep(2)
                 conn.sendall(b"GO F\r\n")
-                continue  # Pas de réponse finale unique → on boucle directement
+                continue
             else:
                 resp = "ERR UNKNOWN COMMAND\r\n"
 
