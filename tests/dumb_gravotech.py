@@ -2,7 +2,6 @@ import socket
 import threading
 import time
 
-
 HOST = "127.0.0.1"
 PORT = 3000
 
@@ -58,7 +57,9 @@ def main():
 
         while True:
             conn, addr = s.accept()
-            threading.Thread(target=handle_client, args=(conn, addr), daemon=True).start()
+            threading.Thread(
+                target=handle_client, args=(conn, addr), daemon=True
+            ).start()
 
 
 if __name__ == "__main__":
