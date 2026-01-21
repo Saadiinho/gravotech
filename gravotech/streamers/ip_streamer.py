@@ -12,6 +12,7 @@ class IPStreamer:
         self.max_attempts = 5
         self.sock: Optional[socket.socket] = None
         self.mu = threading.RLock()
+        self.connect()
 
     def connect(self):
         """Ouvre la connexion TCP/IP"""

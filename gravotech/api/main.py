@@ -1,18 +1,11 @@
-from time import sleep
-
-from gravotech.streamers.ip_streamer import IPStreamer
+from gravotech.core.gravotech import Gravotech
 
 __version__ = "1.0.0"
 
 HOST = "127.0.0.1"
 PORT = 3000
 
-ip_streamer = IPStreamer(HOST, PORT)
+graveuse = Gravotech(HOST, PORT)
 
 if __name__ == "__main__":
-    ip_streamer.connect()
-    sleep(2)
-    print(ip_streamer.write(f"LS\r"))
-    # while resp != "GO F":
-    sleep(0.2)
-    ip_streamer.close()
+    print(graveuse.Actions.ls())
