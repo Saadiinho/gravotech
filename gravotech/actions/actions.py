@@ -13,6 +13,12 @@ class GraveuseAction:
     def __init__(self, streamer: IPStreamer):
         self.streamer = streamer
 
+    def ad(self) -> str:
+        return self.streamer.write("AD\r")
+
+    def am(self) -> str:
+        return self.streamer.write("AM\r")
+
     def go(self) -> str:
         unlock = self.streamer.lock()
         try:
@@ -34,6 +40,10 @@ class GraveuseAction:
 
     def ls(self, mask: str = None) -> str:
         cmd = f"LS {mask}" if mask else "LS"
+        return self.streamer.write(cmd)
+
+    def rm(self, mask) -> str:
+        cmd = f"RM {mask}" if mask else "RM"
         return self.streamer.write(cmd)
 
     def st(self) -> str:
