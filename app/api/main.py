@@ -99,9 +99,7 @@ async def ld(request_body: LoadFile, request: Request):
     check_graveuse(graveuse)
     try:
         resp = graveuse.Actions.ld(
-            request_body.filename,
-            request_body.nb_marking,
-            request_body.mode
+            request_body.filename, request_body.nb_marking, request_body.mode
         )
         return {"response": resp}
     except Exception as e:
