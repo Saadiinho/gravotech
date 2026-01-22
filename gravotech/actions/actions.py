@@ -1,6 +1,7 @@
 from enum import Enum
 
 from gravotech.streamers.ip_streamer import IPStreamer
+from gravotech.utils.errors import check_err
 
 
 class LDMode(Enum):
@@ -26,59 +27,32 @@ class GraveuseAction:
         self.streamer = streamer
 
     def ad(self) -> str:
-        """
-        Acknowledge and clear the current fault state.
-
-        This command must be called after a fault (GO S, AM, or error state)
-        before the machine can accept new marking commands.
-
-        :return: Machine response (typically "AD 1" on success)
-        :rtype: str
-        :raises RuntimeError: If the machine is not in a fault state
-        """
-        return self.streamer.write("AD\r")
+        resp = self.streamer.write("AD\r")
+        if resp.startswith("ER"):
+            return check_err(resp)
+        return resp
 
     def am(self) -> str:
-        """
-        Stop the marking process immediately.
-
-        This command aborts the current marking operation and puts the machine
-        into a fault state. Use :meth:`ad` to acknowledge the fault afterwards.
-
-        :return: Machine response (typically "AM 1" on success)
-        :rtype: str
-        :raises RuntimeError: If no marking is in progress
-        """
-        return self.streamer.write("AM\r")
+        resp = self.streamer.write("AM\r")
+        if resp.startswith("ER"):
+            return check_err(resp)
+        return resp
 
     def go(self) -> str:
-        """
-        Start the marking process and wait for completion.
-
-        This is a blocking operation that waits until the marking cycle finishes.
-        The method locks the streamer to ensure atomic execution.
-
-        :return: Final marking state:
-            - "GO F": Marking finished successfully
-            - "GO S": Marking stopped (fault occurred)
-            - "GO P": Marking paused (waiting for interlock/operator)
-            - "ER ...": Error code
-        :rtype: str
-        :raises RuntimeError: If initial response is not "GO M"
-        :raises TimeoutError: If marking exceeds the configured timeout
-        """
         unlock = self.streamer.lock()
         try:
             self.streamer.unsafe_write("GO")
             resp = self.streamer.unsafe_read()
             if resp.startswith("ER"):
-                return resp
+                return check_err(resp)
             if "GO M" not in resp:
                 raise RuntimeError(f"Expected 'GO M', got '{resp}'")
             while True:
                 resp = self.streamer.unsafe_read()
-                if resp in ["GO P", "GO S", "GO F"] or resp.startswith("ER"):
+                if resp in ["GO P", "GO S", "GO F"] :
                     return resp
+                if resp.startswith("ER"):
+                    return check_err(resp)
         finally:
             unlock()
 
@@ -92,7 +66,10 @@ class GraveuseAction:
         :return: Connection status (e.g., 'GP "MASTER":"1"' if master)
         :rtype: str
         """
-        return self.streamer.write('GP "MASTER"\r')
+        resp = self.streamer.write('GP "MASTER"\r')
+        if resp.startswith("ER"):
+            return check_err(resp)
+        return resp
 
     def ld(self, filename: str, nb_marking: int, mode: LDMode) -> str:
         """
@@ -111,7 +88,10 @@ class GraveuseAction:
         :rtype: str
         :raises RuntimeError: If the file doesn't exist or is invalid
         """
-        return self.streamer.write(f'LD "{filename}" {nb_marking} {mode.value}\r')
+        resp = self.streamer.write(f'LD "{filename}" {nb_marking} {mode.value}\r')
+        if resp.startswith("ER"):
+            return check_err(resp)
+        return resp
 
     def ls(self, mask: str = None) -> str:
         """
@@ -127,7 +107,10 @@ class GraveuseAction:
         :rtype: str
         """
         cmd = f"LS {mask}" if mask else "LS"
-        return self.streamer.write(cmd)
+        resp = self.streamer.write(cmd)
+        if resp.startswith("ER"):
+            return check_err(resp)
+        return resp
 
     def pf(self, filename: str, data: bytes) -> str:
         """
@@ -143,7 +126,10 @@ class GraveuseAction:
         :rtype: str
         :raises RuntimeError: If the file is too large or invalid
         """
-        return self.streamer.write(f'PF "{filename}" {data}\r')
+        resp = self.streamer.write(f'PF "{filename}" {data}\r')
+        if resp.startswith("ER"):
+            return check_err(resp)
+        return resp
 
     def rm(self, mask: str) -> str:
         """
@@ -158,7 +144,10 @@ class GraveuseAction:
         :rtype: str
         """
         cmd = f"RM {mask}" if mask else "RM"
-        return self.streamer.write(cmd)
+        resp = self.streamer.write(cmd)
+        if resp.startswith("ER"):
+            return check_err(resp)
+        return resp
 
     def sp(self, value: bool) -> str:
         """
@@ -173,7 +162,10 @@ class GraveuseAction:
         :rtype: str
         :raises RuntimeError: If another client already holds master control
         """
-        return self.streamer.write(f'SP "MASTER":"{int(value)}"\r')
+        resp = self.streamer.write(f'SP "MASTER":"{int(value)}"\r')
+        if resp.startswith("ER"):
+            return check_err(resp)
+        return resp
 
     def st(self) -> str:
         """
@@ -188,7 +180,10 @@ class GraveuseAction:
             - markmode: 0=Normal, 1=Autonomous, 2=Simulation
         :rtype: str
         """
-        return self.streamer.write(f"ST\r")
+        resp = self.streamer.write(f"ST\r")
+        if resp.startswith("ER"):
+            return check_err(resp)
+        return resp
 
     def vg(self, index: int) -> str:
         """
@@ -202,7 +197,10 @@ class GraveuseAction:
         :rtype: str
         :raises RuntimeError: If index is out of range
         """
-        return self.streamer.write(f"VG {index}\r")
+        resp = self.streamer.write(f"VG {index}\r")
+        if resp.startswith("ER"):
+            return check_err(resp)
+        return resp
 
     def vs(self, index: int, text: str) -> str:
         """
@@ -218,4 +216,7 @@ class GraveuseAction:
         :rtype: str
         :raises RuntimeError: If index is out of range
         """
-        return self.streamer.write(f'VS {index} "{text}"\r')
+        resp = self.streamer.write(f'VS {index} "{text}"\r')
+        if resp.startswith("ER"):
+            return check_err(resp)
+        return resp
