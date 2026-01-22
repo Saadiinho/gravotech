@@ -10,11 +10,11 @@ from app.api.models import (
     Response,
     HealthcheckResponse,
 )
+from app.config import settings
 from libs.core.gravotech import Gravotech
 
-# TODO Recuperer des variables de configuration
-IP = "127.0.0.1"
-PORT = 3000
+IP = settings.graveuse_ip
+PORT = settings.graveuse_port
 
 __version__ = "1.0.0"
 
