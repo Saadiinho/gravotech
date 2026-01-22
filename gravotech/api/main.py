@@ -12,7 +12,13 @@ async def lifespan(app: FastAPI):
     app.state.graveuse = Gravotech(ip=IP, port=PORT)
     yield
     graveuse.Streamer.close()
-app = FastAPI(lifespan=lifespan, title="Gravotech")
+app = FastAPI(
+    lifespan=lifespan,
+    title="Gravotech",
+    description="API for communication with gravotech graveuse",
+    version=__version__,
+    root_path="/api/v1",
+)
 
 @app.post("/st")
 def st():
