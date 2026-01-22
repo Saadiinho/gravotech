@@ -88,7 +88,7 @@ class GraveuseAction:
             return check_err(resp)
         return resp
 
-    def sp(self, value: bool) -> str:
+    def sp(self, value: bool) -> str: # TODO Check if value is bool
         resp = self.streamer.write(f'SP "MASTER":"{int(value)}"\r')
         if resp.startswith("ER"):
             return check_err(resp)
