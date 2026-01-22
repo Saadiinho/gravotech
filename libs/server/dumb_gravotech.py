@@ -9,7 +9,7 @@ PORT = 3000
 
 
 def handle_client(conn, addr):
-    logger.logger.info()
+    logging.info(f"Client {str(addr)} connected")
     with conn:
         while True:
             buffer = b""
@@ -17,13 +17,13 @@ def handle_client(conn, addr):
                 try:
                     byte = conn.recv(1)
                     if not byte:
-                        logger.logger.debug(f"Client disconnect: {addr}")
+                        logging.debug(f"Client disconnect: {addr}")
                         return
                     buffer += byte
                     if byte == b"\r":
                         break
                 except Exception:
-                    logger.error(f"reading error")
+                    logging.error(f"reading error")
                     return
             try:
                 cmd_str = buffer.decode("ascii").rstrip("\r")
@@ -31,7 +31,7 @@ def handle_client(conn, addr):
                 conn.sendall(b"ERR INVALID ENCODING\r\n")
                 continue
 
-            logger.logger.info(f"Receive: {repr(cmd_str)}")
+            logging.info(f"Receive: {repr(cmd_str)}")
 
             if cmd_str == "ST":
                 resp = "ST 4 0 0\r\n"
@@ -45,7 +45,7 @@ def handle_client(conn, addr):
             else:
                 resp = "ERR UNKNOWN COMMAND\r\n"
 
-            logger.logger.info(f"Send: {repr(resp.strip())}")
+            logging.info(f"Send: {repr(resp.strip())}")
             conn.sendall(resp.encode("ascii"))
 
 
@@ -54,7 +54,7 @@ def main():
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind((HOST, PORT))
         s.listen()
-        logger.logger.info(f"Fake Gravotech Server launch on {HOST}:{PORT}")
+        logging.info(f"Fake Gravotech Server launch on {HOST}:{PORT}")
         while True:
             conn, addr = s.accept()
             threading.Thread(
