@@ -124,10 +124,9 @@ stop-servers:
 run-server:
 	docker compose --env-file .env -f ./docker/docker-compose.yml --project-directory . up graveuse_fake
 
-.PHONY: run-api-prod
+.PHONY: run-api
 run-api-prod:
-	docker compose --env-file .env.prod -f ./docker/docker-compose-prod.yml --project-directory . up realtime_api
-
+	docker compose --env-file .env.prod -f ./docker/docker-compose-prod.yml --project-directory . up graveuse_api
 
 .PHONY: run
 run:stop

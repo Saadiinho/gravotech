@@ -8,3 +8,13 @@ services:
     env_file:
       - '.env'
     network_mode: host
+
+  graveuse_api:
+    restart: always
+    image: graveuse_api
+    container_name: graveuse_api
+    ports:
+      - "3001:3001"
+    env_file:
+      - '.env'
+    network_mode: host
