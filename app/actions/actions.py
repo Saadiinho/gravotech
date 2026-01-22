@@ -1,7 +1,7 @@
 from enum import Enum
 
-from gravotech.streamers.ip_streamer import IPStreamer
-from gravotech.utils.errors import check_err
+from app.streamers.ip_streamer import IPStreamer
+from app.utils.errors import check_err
 
 
 class LDMode(Enum):

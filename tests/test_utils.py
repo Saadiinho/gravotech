@@ -1,5 +1,5 @@
 import pytest
-from gravotech.utils.errors import check_err
+from app.utils.errors import check_err
 
 
 @pytest.mark.parametrize(

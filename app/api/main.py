@@ -1,8 +1,8 @@
 from typing import Optional
 from fastapi import FastAPI, HTTPException
 
-from gravotech.api.models import LoadFile, Mask, PushFile, SetValue, GetValue, Rule, Response, HealthcheckResponse
-from gravotech.core.gravotech import Gravotech
+from app.api.models import LoadFile, Mask, PushFile, SetValue, GetValue, Rule, Response, HealthcheckResponse
+from app.core.gravotech import Gravotech
 
 graveuse = Optional[Gravotech]
 
@@ -22,7 +22,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     lifespan=lifespan,
     title="Gravotech",
-    description="API for communication with gravotech graveuse",
+    description="API for communication with app graveuse",
     version=__version__,
     root_path="/api/v1",
 )
