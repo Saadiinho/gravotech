@@ -1,7 +1,16 @@
 from typing import Optional
 from fastapi import FastAPI, HTTPException
 
-from app.api.models import LoadFile, Mask, PushFile, SetValue, GetValue, Rule, Response, HealthcheckResponse
+from app.api.models import (
+    LoadFile,
+    Mask,
+    PushFile,
+    SetValue,
+    GetValue,
+    Rule,
+    Response,
+    HealthcheckResponse,
+)
 from app.core.gravotech import Gravotech
 
 graveuse = Optional[Gravotech]
@@ -41,6 +50,7 @@ async def healthcheck():
         "version": __version__,
     }
 
+
 @app.post("/acquit-default", response_model=Response)
 async def ad():
     check_graveuse(graveuse)
@@ -49,6 +59,7 @@ async def ad():
         return {"response": resp}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.post("/stop-marquage", response_model=Response)
 async def am():
@@ -59,6 +70,7 @@ async def am():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @app.post("/start-marquage", response_model=Response)
 async def go():
     check_graveuse(graveuse)
@@ -67,6 +79,7 @@ async def go():
         return {"response": resp}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.post("/get-state", response_model=Response)
 async def gp():
@@ -77,6 +90,7 @@ async def gp():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @app.post("/load-file", response_model=Response)
 async def ld(request_body: LoadFile):
     check_graveuse(graveuse)
@@ -84,10 +98,13 @@ async def ld(request_body: LoadFile):
         filename = request_body.filename
         nb_marking = request_body.nb_marking
         mode = request_body.mode
-        resp = graveuse.Actions.ld(filename, nb_marking, mode) # TODO Check mode because mode is LDMode but LoadFile.mode is str
+        resp = graveuse.Actions.ld(
+            filename, nb_marking, mode
+        )  # TODO Check mode because mode is LDMode but LoadFile.mode is str
         return {"response": resp}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.post("/list-file", response_model=Response)
 async def ls(request_body: Mask):
@@ -97,6 +114,7 @@ async def ls(request_body: Mask):
         return {"response": resp}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.post("/push-file", response_model=Response)
 async def pf(request_body: PushFile):
@@ -110,7 +128,6 @@ async def pf(request_body: PushFile):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-
 @app.post("/remove-file", response_model=Response)
 async def rm(request_body: Mask):
     check_graveuse(graveuse)
@@ -120,8 +137,9 @@ async def rm(request_body: Mask):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @app.post("/set-rule", response_model=Response)
-async def sp(request_body: Rule): # TODO Check the type of Rule.rule
+async def sp(request_body: Rule):  # TODO Check the type of Rule.rule
     check_graveuse(graveuse)
     try:
         resp = graveuse.Actions.sp(request_body.rule)
@@ -149,6 +167,7 @@ async def vg(request_body: GetValue):
         return {"response": resp}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.post("/set-value", response_model=Response)
 async def vs(request_body: SetValue):

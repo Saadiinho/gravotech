@@ -31,7 +31,7 @@ class IPStreamer:
             try:
                 self.sock.close()
             except Exception:
-                pass
+                raise RuntimeError(f"Closing connection to {self.ip}:{self.port} failed")
             self.sock = None
         print(f"Closing connection to {self.ip}:{self.port}")
 
