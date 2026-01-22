@@ -47,8 +47,6 @@ Create a `.env` file at the root of the project:
 ```env
 GRAVOTECH_IP=192.168.1.100
 GRAVOTECH_PORT=55555
-API_HOST=0.0.0.0
-API_PORT=8000
 ```
 Replace GRAVOTECH_IP with your actual engraver's IP address.
 
