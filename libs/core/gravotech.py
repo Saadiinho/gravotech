@@ -1,5 +1,5 @@
-from app.actions.actions import GraveuseAction
-from app.streamers.ip_streamer import IPStreamer
+from libs.actions.actions import GraveuseAction
+from libs.streamers.ip_streamer import IPStreamer
 
 
 class Gravotech:

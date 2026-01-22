@@ -11,7 +11,7 @@ from app.api.models import (
     Response,
     HealthcheckResponse,
 )
-from app.core.gravotech import Gravotech
+from libs.core.gravotech import Gravotech
 
 graveuse = Optional[Gravotech]
 

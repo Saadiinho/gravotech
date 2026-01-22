@@ -25,16 +25,21 @@ lint-score:
 # lint-all: run pylint on the libs directory
 .PHONY: lint
 lint:
-	PYTHONPATH=. .venv/bin/pylint ./app/ ./tests/
+	PYTHONPATH=. .venv/bin/pylint ./app/ ./libs/ ./tests/
 
 # lint-app: run pylint on the app directory
 .PHONY: lint-app
 lint-app:
 	PYTHONPATH=. .venv/bin/pylint ./app/
 
-# lint-test: run pylint on the tests directory
-.PHONY: lint-test
-lint-test:
+# lint-libs: run pylint on the libs directory
+.PHONY: lint-libs
+lint-libs:
+	PYTHONPATH=. .venv/bin/pylint ./libs/
+
+# lint-tests: run pylint on the tests directory
+.PHONY: lint-tests
+lint-tests:
 	PYTHONPATH=. .venv/bin/pylint ./tests/
 
 
@@ -69,33 +74,22 @@ black-check:
 # bandit: verification of security in the code
 .PHONY: bandit
 bandit:
-	bandit -r app/actions/*.py
 	bandit -r app/api/*.py
-	bandit -r app/core/*.py
-	bandit -r app/streamers/*.py
-	bandit -r app/utils/*.py
+	bandit -r libs/actions/*.py
+	bandit -r libs/core/*.py
+	bandit -r libs/server/*.py
+	bandit -r libs/streamers/*.py
+	bandit -r libs/utils/*.py
 	bandit -r tests/*.py
 
 # ==================================================================================== #
 # START SERVER AND CLIENT AND GENERATE SCRIPTS
 # ==================================================================================== #
 
-# server: lunch server
-.PHONY: server
-server:
-	PYTHONPATH=. .venv/bin/python3 app/server/main.py
-
-# client: lunch client
-.PHONY: client
-client:
-	PYTHONPATH=. .venv/bin/uvicorn app.client.api:app --host 0.0.0.0 --port 8000
-
-# generate: generate scripts of server and mdd
-.PHONY: generate
-generate:
-	PYTHONPATH=. .venv/bin/python3 app/generation/generate_script.py
-	make black
-
+# fake-graveuse: lunch a fake graveuse
+.PHONY: fake-graveuse
+fake-graveuse:
+	PYTHONPATH=. .venv/bin/python3 libs/server/dumb_gravotech.py
 
 # ==================================================================================== #
 # DOCKER BUILD
@@ -103,11 +97,11 @@ generate:
 
 .PHONY: build-server
 build-server:
-	docker build --no-cache -t realtime_server -f ./docker/server.Dockerfile .
+	docker build --no-cache -t graveuse_fake -f ./docker/server.Dockerfile .
 
 .PHONY: build-api
 build-api:
-	docker build -t realtime_api -f ./docker/Dockerfile .
+	docker build -t graveuse_api -f ./docker/Dockerfile .
 
 
 # ==================================================================================== #
@@ -125,18 +119,6 @@ stop-servers:
 # ==================================================================================== #
 # DOCKER RUN
 # ==================================================================================== #
-
-.PHONY: run-server2
-run-server2: build-server
-	docker compose --env-file .env.api2 -f ./docker/docker-compose.yml --project-directory . up realtime_server2 -d
-
-.PHONY: run-server3
-run-server3:
-	docker compose --env-file .env.api3 -f ./docker/docker-compose.yml --project-directory . up realtime_server3 -d
-
-.PHONY: run-servers
-run-servers: build-server
-	docker compose -f ./docker/docker-compose-server.yml --project-directory . up -d
 
 .PHONY: run-api
 run-api:
