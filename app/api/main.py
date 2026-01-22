@@ -1,5 +1,4 @@
-from typing import Optional
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 
 from app.api.models import (
     LoadFile,
@@ -13,8 +12,6 @@ from app.api.models import (
 )
 from libs.core.gravotech import Gravotech
 
-graveuse = Optional[Gravotech]
-
 # TODO Recuperer des variables de configuration
 IP = "127.0.0.1"
 PORT = 3000
@@ -23,9 +20,10 @@ __version__ = "1.0.0"
 
 
 async def lifespan(app: FastAPI):
-    app.state.graveuse = Gravotech(ip=IP, port=PORT)
+    instance = Gravotech(ip=IP, port=PORT)
+    app.state.graveuse = instance
     yield
-    graveuse.Streamer.close()
+    instance.Streamer.close()
 
 
 app = FastAPI(
@@ -52,7 +50,8 @@ async def healthcheck():
 
 
 @app.post("/acquit-default", response_model=Response)
-async def ad():
+async def ad(request: Request):
+    graveuse = request.app.state.graveuse
     check_graveuse(graveuse)
     try:
         resp = graveuse.Actions.ad()
@@ -62,7 +61,8 @@ async def ad():
 
 
 @app.post("/stop-marquage", response_model=Response)
-async def am():
+async def am(request: Request):
+    graveuse = request.app.state.graveuse
     check_graveuse(graveuse)
     try:
         resp = graveuse.Actions.am()
@@ -72,7 +72,8 @@ async def am():
 
 
 @app.post("/start-marquage", response_model=Response)
-async def go():
+async def go(request: Request):
+    graveuse = request.app.state.graveuse
     check_graveuse(graveuse)
     try:
         resp = graveuse.Actions.go()
@@ -82,7 +83,8 @@ async def go():
 
 
 @app.post("/get-state", response_model=Response)
-async def gp():
+async def gp(request: Request):
+    graveuse = request.app.state.graveuse
     check_graveuse(graveuse)
     try:
         resp = graveuse.Actions.gp()
@@ -92,7 +94,8 @@ async def gp():
 
 
 @app.post("/load-file", response_model=Response)
-async def ld(request_body: LoadFile):
+async def ld(request_body: LoadFile, request: Request):
+    graveuse = request.app.state.graveuse
     check_graveuse(graveuse)
     try:
         filename = request_body.filename
@@ -107,7 +110,8 @@ async def ld(request_body: LoadFile):
 
 
 @app.post("/list-file", response_model=Response)
-async def ls(request_body: Mask):
+async def ls(request_body: Mask, request: Request):
+    graveuse = request.app.state.graveuse
     check_graveuse(graveuse)
     try:
         resp = graveuse.Actions.ls(request_body.mask)
@@ -117,7 +121,8 @@ async def ls(request_body: Mask):
 
 
 @app.post("/push-file", response_model=Response)
-async def pf(request_body: PushFile):
+async def pf(request_body: PushFile, request: Request):
+    graveuse = request.app.state.graveuse
     check_graveuse(graveuse)
     try:
         filename = request_body.filename
@@ -129,7 +134,8 @@ async def pf(request_body: PushFile):
 
 
 @app.post("/remove-file", response_model=Response)
-async def rm(request_body: Mask):
+async def rm(request_body: Mask, request: Request):
+    graveuse = request.app.state.graveuse
     check_graveuse(graveuse)
     try:
         resp = graveuse.Actions.rm(request_body.mask)
@@ -139,7 +145,8 @@ async def rm(request_body: Mask):
 
 
 @app.post("/set-rule", response_model=Response)
-async def sp(request_body: Rule):  # TODO Check the type of Rule.rule
+async def sp(request_body: Rule, request: Request):  # TODO Check the type of Rule.rule
+    graveuse = request.app.state.graveuse
     check_graveuse(graveuse)
     try:
         resp = graveuse.Actions.sp(request_body.rule)
@@ -149,7 +156,8 @@ async def sp(request_body: Rule):  # TODO Check the type of Rule.rule
 
 
 @app.post("/get-status", response_model=Response)
-async def st():
+async def st(request: Request):
+    graveuse = request.app.state.graveuse
     check_graveuse(graveuse)
     try:
         resp = graveuse.Actions.st()
@@ -160,7 +168,8 @@ async def st():
 
 
 @app.post("/get-value", response_model=Response)
-async def vg(request_body: GetValue):
+async def vg(request_body: GetValue, request: Request):
+    graveuse = request.app.state.graveuse
     check_graveuse(graveuse)
     try:
         resp = graveuse.Actions.vg(request_body.value)
@@ -170,7 +179,8 @@ async def vg(request_body: GetValue):
 
 
 @app.post("/set-value", response_model=Response)
-async def vs(request_body: SetValue):
+async def vs(request_body: SetValue, request: Request):
+    graveuse = request.app.state.graveuse
     check_graveuse(graveuse)
     try:
         index = request_body.index
