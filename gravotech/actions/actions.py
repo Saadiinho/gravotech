@@ -49,7 +49,7 @@ class GraveuseAction:
                 raise RuntimeError(f"Expected 'GO M', got '{resp}'")
             while True:
                 resp = self.streamer.unsafe_read()
-                if resp in ["GO P", "GO S", "GO F"] :
+                if resp in ["GO P", "GO S", "GO F"]:
                     return resp
                 if resp.startswith("ER"):
                     return check_err(resp)
