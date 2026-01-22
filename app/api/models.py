@@ -1,10 +1,12 @@
 from pydantic import BaseModel
 
+from libs.actions.actions import LDMode
+
 
 class LoadFile(BaseModel):
     filename: str
     nb_marking: int
-    mode: str
+    mode: LDMode
 
 
 class Mask(BaseModel):

@@ -98,12 +98,11 @@ async def ld(request_body: LoadFile, request: Request):
     graveuse = request.app.state.graveuse
     check_graveuse(graveuse)
     try:
-        filename = request_body.filename
-        nb_marking = request_body.nb_marking
-        mode = request_body.mode
         resp = graveuse.Actions.ld(
-            filename, nb_marking, mode
-        )  # TODO Check mode because mode is LDMode but LoadFile.mode is str
+            request_body.filename,
+            request_body.nb_marking,
+            request_body.mode
+        )
         return {"response": resp}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -145,7 +144,7 @@ async def rm(request_body: Mask, request: Request):
 
 
 @app.post("/set-rule", response_model=Response)
-async def sp(request_body: Rule, request: Request):  # TODO Check the type of Rule.rule
+async def sp(request_body: Rule, request: Request):
     graveuse = request.app.state.graveuse
     check_graveuse(graveuse)
     try:

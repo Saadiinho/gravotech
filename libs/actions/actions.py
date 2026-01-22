@@ -4,7 +4,7 @@ from libs.streamers.ip_streamer import IPStreamer
 from libs.utils.errors import check_err
 
 
-class LDMode(Enum):
+class LDMode(str, Enum):
     """Marking file execution mode for the LD command."""
 
     NORMAL = "N"
@@ -88,7 +88,7 @@ class GraveuseAction:
             return check_err(resp)
         return resp
 
-    def sp(self, value: bool) -> str:  # TODO Check if value is bool
+    def sp(self, value: bool) -> str:
         resp = self.streamer.write(f'SP "MASTER":"{int(value)}"\r')
         if resp.startswith("ER"):
             return check_err(resp)
