@@ -1,0 +1,10 @@
+services:
+  graveuse_fake:
+    restart: always
+    image: graveuse_fake
+    container_name: graveuse_fake
+    ports:
+      - "3000:3000"
+    env_file:
+      - '.env'
+    network_mode: host

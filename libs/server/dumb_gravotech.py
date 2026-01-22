@@ -2,12 +2,14 @@ import socket
 import threading
 import time
 
-HOST = "127.0.0.1"
+import logging
+
+HOST = "0.0.0.0"
 PORT = 3000
 
 
 def handle_client(conn, addr):
-    print(f"✅ Client connecté : {addr}")
+    logger.logger.info()
     with conn:
         while True:
             buffer = b""
@@ -15,22 +17,21 @@ def handle_client(conn, addr):
                 try:
                     byte = conn.recv(1)
                     if not byte:
-                        print("❌ Client déconnecté")
+                        logger.logger.debug(f"Client disconnect: {addr}")
                         return
                     buffer += byte
                     if byte == b"\r":
-                        break  # Fin de commande détectée
+                        break
                 except Exception:
-                    print("❌ Erreur de lecture")
+                    logger.error(f"reading error")
                     return
-
             try:
                 cmd_str = buffer.decode("ascii").rstrip("\r")
             except UnicodeDecodeError:
                 conn.sendall(b"ERR INVALID ENCODING\r\n")
                 continue
 
-            print(f"📥 Reçu : {repr(cmd_str)}")
+            logger.logger.info(f"Receive: {repr(cmd_str)}")
 
             if cmd_str == "ST":
                 resp = "ST 4 0 0\r\n"
@@ -44,7 +45,7 @@ def handle_client(conn, addr):
             else:
                 resp = "ERR UNKNOWN COMMAND\r\n"
 
-            print(f"📤 Envoi : {repr(resp.strip())}")
+            logger.logger.info(f"Send: {repr(resp.strip())}")
             conn.sendall(resp.encode("ascii"))
 
 
@@ -53,13 +54,13 @@ def main():
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind((HOST, PORT))
         s.listen()
-        print(f"🟢 Fake Gravotech Server lancé sur {HOST}:{PORT}")
-
+        logger.logger.info(f"Fake Gravotech Server launch on {HOST}:{PORT}")
         while True:
             conn, addr = s.accept()
             threading.Thread(
                 target=handle_client, args=(conn, addr), daemon=True
             ).start()
+
 
 
 if __name__ == "__main__":
