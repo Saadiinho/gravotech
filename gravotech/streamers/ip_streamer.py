@@ -1,8 +1,8 @@
-import threading
 import socket
+import threading
 import time
 from typing import Optional, Callable
-
+import logging
 
 class IPStreamer:
     """
@@ -35,7 +35,6 @@ class IPStreamer:
         self.max_attempts = 5
         self.sock: Optional[socket.socket] = None
         self.mu = threading.RLock()
-        self.connect()
 
     def connect(self):
         """
@@ -51,7 +50,7 @@ class IPStreamer:
             self.sock.settimeout(10)
             self.sock.connect((self.ip, self.port))
             self.sock.settimeout(self.timeout)
-            print(f"Connected to {self.ip}:{self.port}")
+            logging.info(f"Established connection to {self.ip}:{self.port}")
         except Exception as e:
             self.close()
             raise RuntimeError(f"Connection to {self.ip}:{self.port} failed") from e
@@ -70,7 +69,7 @@ class IPStreamer:
                     f"Closing connection to {self.ip}:{self.port} failed"
                 )
             self.sock = None
-        print(f"Closing connection to {self.ip}:{self.port}")
+        logging.info(f"Closing connection to {self.ip}:{self.port}")
 
     def retry(self, max_attempts: int = 3, delay: float = 1.0) -> bool:
         """
@@ -88,6 +87,7 @@ class IPStreamer:
                 return True
             except Exception as e:
                 if attempt < max_attempts:
+                    logging.error(f"Retrying attempt {attempt}/{max_attempts}: {e}")
                     wait_time = delay * (2 ** (attempt - 1))
                     time.sleep(wait_time)
                 else:
@@ -229,7 +229,7 @@ class IPStreamer:
             try:
                 return self._write_and_read(cmd)
             except (socket.timeout, ConnectionResetError, BrokenPipeError) as e:
-                print(f"Network error: {e}, attempting retry...")
+                logging.error(f"Network error: {e}, attempting retry...")
                 self.retry()
                 return self._write_and_read(cmd)
 
@@ -244,12 +244,3 @@ class IPStreamer:
         if cmd.strip().upper().startswith("LS"):
             return self._read_ls_response()
         return self._read_line()
-
-    def read_ls(self) -> str:
-        """
-        Thread-safe multi-line read for LS command.
-
-        :return: Newline-separated list of files.
-        """
-        with self.mu:
-            return self._read_ls_response()

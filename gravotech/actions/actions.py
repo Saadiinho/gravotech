@@ -1,7 +1,7 @@
 from enum import Enum
 
-from libs.streamers.ip_streamer import IPStreamer
-from libs.utils.errors import check_err
+from src.streamers.ip_streamer import IPStreamer
+from src.utils.errors import check_err
 
 
 class LDMode(str, Enum):

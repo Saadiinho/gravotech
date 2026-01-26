@@ -1,5 +1,5 @@
 import pytest
-from libs.utils.errors import check_err
+from src.utils.errors import check_err
 
 
 @pytest.mark.parametrize(

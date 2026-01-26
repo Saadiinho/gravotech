@@ -1,5 +1,5 @@
-from libs.actions.actions import GraveuseAction
-from libs.streamers.ip_streamer import IPStreamer
+from .actions.actions import GraveuseAction
+from .streamers.ip_streamer import IPStreamer
 
 
 class Gravotech:
@@ -35,3 +35,14 @@ class Gravotech:
         """
         self.Streamer = IPStreamer(ip, port, timeout)
         self.Actions = GraveuseAction(self.Streamer)
+
+    def connect(self):
+        self.Streamer.connect()
+        return self
+
+    def __enter__(self):
+        self.connect()
+        return self
+
+    def __exit__(self, exc_type, exc, tb):
+        self.Streamer.close()

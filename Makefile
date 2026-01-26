@@ -95,14 +95,9 @@ fake-graveuse:
 # DOCKER BUILD
 # ==================================================================================== #
 
-.PHONY: build-server
-build-server:
+.PHONY: build
+build:
 	docker build --no-cache -t graveuse_fake -f ./docker/server.Dockerfile .
-
-.PHONY: build-api
-build-api:
-	docker build -t graveuse_api -f ./docker/Dockerfile .
-
 
 # ==================================================================================== #
 # DOCKER STOP
@@ -112,22 +107,10 @@ build-api:
 stop:
 	docker compose -f ./docker/docker-compose.yml  --project-directory . down
 
-.PHONY: stop-servers
-stop-servers:
-	docker compose -f ./docker/docker-compose-server.yml --project-directory . down
-
 # ==================================================================================== #
 # DOCKER RUN
 # ==================================================================================== #
 
-.PHONY: run-server
-run-server:
-	docker compose --env-file .env -f ./docker/docker-compose.yml --project-directory . up graveuse_fake
-
-.PHONY: run-api
-run-api-prod:
-	docker compose --env-file .env.prod -f ./docker/docker-compose-prod.yml --project-directory . up graveuse_api
-
 .PHONY: run
-run:stop
-	docker compose --env-file .env -f ./docker/docker-compose.yml --project-directory . up
+run:
+	docker compose --env-file .env -f ./docker/docker-compose.yml --project-directory . up graveuse_fake
