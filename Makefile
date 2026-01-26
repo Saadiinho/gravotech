@@ -74,12 +74,10 @@ black-check:
 # bandit: verification of security in the code
 .PHONY: bandit
 bandit:
-	bandit -r app/api/*.py
-	bandit -r libs/actions/*.py
-	bandit -r libs/core/*.py
-	bandit -r libs/server/*.py
-	bandit -r libs/streamers/*.py
-	bandit -r libs/utils/*.py
+	bandit -r gravotech/actions/*.py
+	bandit -r gravotech/*.py
+	bandit -r gravotech/streamers/*.py
+	bandit -r gravotech/utils/*.py
 	bandit -r tests/*.py
 
 # ==================================================================================== #

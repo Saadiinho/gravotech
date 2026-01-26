@@ -4,6 +4,7 @@ import time
 from typing import Optional, Callable
 import logging
 
+
 class IPStreamer:
     """
     Low-level TCP/IP communication interface for Gravotech marking machines.
