@@ -40,7 +40,7 @@ jobs:
       # Formatting (Black)
       # ------------------------------------------------------------
       - name: Code formatting (black)
-        run: make black
+        run: make black-check
 
       # ------------------------------------------------------------
       # Security analysis (Bandit)
