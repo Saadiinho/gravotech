@@ -20,6 +20,7 @@ def test_graveuse_action_am():
     assert resp == "AM 1"
     mock_streamer.write.assert_called_once_with("AM\r")
 
+
 def test_graveuse_action_go():
     mock_streamer = Mock()
     unlock = Mock()
@@ -34,6 +35,7 @@ def test_graveuse_action_go():
     mock_streamer.unsafe_write.assert_called_once_with("GO")
     unlock.assert_called_once()
 
+
 def test_graveuse_action_gp():
     mock_streamer = Mock()
     mock_streamer.write.return_value = 'GP "MASTER":"1"'
@@ -41,6 +43,7 @@ def test_graveuse_action_gp():
     resp = action.gp()
     assert resp == 'GP "MASTER":"1"'
     mock_streamer.write.assert_called_once_with('GP "MASTER"\r')
+
 
 def test_graveuse_action_ld():
     mock_streamer = Mock()
@@ -50,13 +53,15 @@ def test_graveuse_action_ld():
     assert resp == "2\ntest.t2l\ntest2.t2l\r"
     mock_streamer.write.assert_called_once_with('LD "test.t2l" 1 N\r')
 
+
 def test_graveuse_action_ls():
     mock_streamer = Mock()
     mock_streamer.write.return_value = "AD 1"
     action = GraveuseAction(mock_streamer)
     resp = action.ls("*.t2l")
     assert resp == "AD 1"
-    mock_streamer.write.assert_called_once_with('LS *.t2l\r')
+    mock_streamer.write.assert_called_once_with("LS *.t2l\r")
+
 
 def test_graveuse_action_pf():
     mock_streamer = Mock()
@@ -65,9 +70,7 @@ def test_graveuse_action_pf():
     data = b"DEADBEEF"
     resp = action.pf("test.t2l", data)
     assert resp == "PF 1"
-    mock_streamer.write.assert_called_once_with(
-        f'PF "test.t2l" {data}\r'
-    )
+    mock_streamer.write.assert_called_once_with(f'PF "test.t2l" {data}\r')
 
 
 def test_graveuse_action_rm():
@@ -78,6 +81,7 @@ def test_graveuse_action_rm():
     assert resp == "RM 1"
     mock_streamer.write.assert_called_once_with("RM *.t2l\r")
 
+
 def test_graveuse_action_sp():
     mock_streamer = Mock()
     mock_streamer.write.return_value = "AD 1"
@@ -85,6 +89,7 @@ def test_graveuse_action_sp():
     resp = action.sp(True)
     assert resp == "AD 1"
     mock_streamer.write.assert_called_once_with('SP "MASTER":"1"\r')
+
 
 def test_graveuse_action_st():
     mock_streamer = Mock()
@@ -94,6 +99,7 @@ def test_graveuse_action_st():
     assert resp == "ST 4 0 0"
     mock_streamer.write.assert_called_once_with("ST\r")
 
+
 def test_graveuse_action_vg():
     mock_streamer = Mock()
     mock_streamer.write.return_value = "example\r\n"
@@ -101,6 +107,7 @@ def test_graveuse_action_vg():
     resp = action.vg(3)
     assert resp == "example\r\n"
     mock_streamer.write.assert_called_once_with("VG 3\r")
+
 
 def test_graveuse_action_vs():
     mock_streamer = Mock()
