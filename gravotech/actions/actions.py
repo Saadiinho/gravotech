@@ -1,7 +1,7 @@
 from enum import Enum
 
-from src.streamers.ip_streamer import IPStreamer
-from src.utils.errors import check_err
+from gravotech.streamers.ip_streamer import IPStreamer
+from gravotech.utils.errors import check_err
 
 
 class LDMode(str, Enum):
@@ -135,7 +135,7 @@ class GraveuseAction:
         :rtype: str
         :raises ValueError: If the machine returns an error code (ER).
         """
-        cmd = f"LS {mask}" if mask else "LS"
+        cmd = f"LS {mask}\r" if mask else "LS\r"
         resp = self.streamer.write(cmd)
         if resp.startswith("ER"):
             return check_err(resp)
@@ -172,7 +172,7 @@ class GraveuseAction:
         :rtype: str
         :raises ValueError: If the machine returns an error code (ER).
         """
-        cmd = f"RM {mask}" if mask else "RM"
+        cmd = f"RM {mask}\r" if mask else "RM\r"
         resp = self.streamer.write(cmd)
         if resp.startswith("ER"):
             return check_err(resp)
