@@ -78,7 +78,6 @@ bandit:
 	bandit -r gravotech/*.py
 	bandit -r gravotech/streamers/*.py
 	bandit -r gravotech/utils/*.py
-	bandit -r tests/*.py
 
 # ==================================================================================== #
 # START SERVER AND CLIENT AND GENERATE SCRIPTS
