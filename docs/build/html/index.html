@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gravotech Python SDK &mdash; gravotech-docs 1.0.0 documentation</title>
+  <title>Gravotech Python (Unofficial) &mdash; gravotech-docs 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
@@ -44,8 +44,7 @@
               <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Utilisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">Référence API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
 </ul>
 
         </div>
@@ -62,7 +61,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Gravotech Python SDK</li>
+      <li class="breadcrumb-item active">Gravotech Python (Unofficial)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -72,29 +71,186 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="gravotech-python-sdk">
-<h1>Gravotech Python SDK<a class="headerlink" href="#gravotech-python-sdk" title="Link to this heading"></a></h1>
-<p>SDK Python pour communiquer avec les graveuses Gravotech via TCP/IP.</p>
-<p>Ce package fournit :</p>
+  <section id="gravotech-python-unofficial">
+<h1>Gravotech Python (Unofficial)<a class="headerlink" href="#gravotech-python-unofficial" title="Link to this heading"></a></h1>
+<p>Gravotech Python is an unofficial, open-source Python library that enables communication
+with Gravotech engraving machines using the TL07 protocol over TCP/IP.</p>
+<p>This package provides a high-level, Pythonic interface for interacting with Gravotech
+machines, abstracting away low-level socket communication while preserving access to
+core TL07 commands when needed.</p>
+<p>It is designed for industrial environments where reliability, testability, and maintainability
+are essential.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This project is not affiliated with, endorsed by, or supported by Gravotech.
+Gravotech®, TL07®, and related trademarks remain the property of their respective owners.</p>
+</div>
+<p>—</p>
+<section id="project-goals">
+<h2>🚀 <strong>Project Goals</strong><a class="headerlink" href="#project-goals" title="Link to this heading"></a></h2>
+<p>This library aims to:</p>
 <ul class="simple">
-<li><p>Une couche réseau robuste (IPStreamer)</p></li>
-<li><p>Une interface haut niveau pour les commandes Gravotech</p></li>
-<li><p>Une gestion automatique des erreurs et du threading</p></li>
+<li><p>Simplify integration with Gravotech TL07-based machines</p></li>
+<li><p>Provide a clean, high-level Python API for machine control</p></li>
+<li><p>Encapsulate low-level TCP/IP communication details</p></li>
+<li><p>Offer thread-safe communication mechanisms</p></li>
+<li><p>Enable automated engraving workflows</p></li>
+<li><p>Improve testability and maintainability of industrial codebases</p></li>
 </ul>
-<section id="contenu">
-<h2>Contenu<a class="headerlink" href="#contenu" title="Link to this heading"></a></h2>
+<p>—</p>
+</section>
+<section id="who-is-this-for">
+<h2>🎯 <strong>Who is this for?</strong><a class="headerlink" href="#who-is-this-for" title="Link to this heading"></a></h2>
+<p>This package is primarily intended for:</p>
+<ul class="simple">
+<li><p>Industrial software developers</p></li>
+<li><p>Automation engineers</p></li>
+<li><p>Manufacturing and methods engineering teams</p></li>
+<li><p>System integrators working with MES/ERP systems</p></li>
+<li><p>R&amp;D teams prototyping engraving workflows</p></li>
+</ul>
+<p>—</p>
+</section>
+<section id="what-problems-does-this-solve">
+<h2>🔧 <strong>What problems does this solve?</strong><a class="headerlink" href="#what-problems-does-this-solve" title="Link to this heading"></a></h2>
+<p>Traditional Gravotech integrations often suffer from:</p>
+<ul class="simple">
+<li><p>Complex, low-level TCP/IP communication</p></li>
+<li><p>Limited abstraction over the TL07 protocol</p></li>
+<li><p>Machine-specific, hard-to-maintain scripts</p></li>
+<li><p>Tight coupling between business logic and machine control</p></li>
+<li><p>Lack of automated testing</p></li>
+</ul>
+<p>This library addresses these issues by providing:</p>
+<ul class="simple">
+<li><p>A structured, object-oriented interface</p></li>
+<li><p>Clear separation between transport and business logic</p></li>
+<li><p>Built-in thread safety</p></li>
+<li><p>A test-friendly architecture</p></li>
+<li><p>A reusable foundation for industrial projects</p></li>
+</ul>
+<p>—</p>
+</section>
+<section id="getting-started">
+<h2>📦 <strong>Getting Started</strong><a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<p>If you are new to this library, we recommend following this reading path:</p>
+<ol class="arabic simple">
+<li><p><strong>Installation</strong> — Install the package and set up your environment.</p></li>
+<li><p><strong>Usage Guide</strong> — Learn the basic concepts and workflow.</p></li>
+</ol>
+<p>—</p>
+</section>
+<section id="documentation">
+<h2>📖 <strong>Documentation</strong><a class="headerlink" href="#documentation" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Utilisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">Référence API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api_client.html">Client Gravotech</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_actions.html">Actions Gravotech</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-from-pypi">📦 <strong>Install from PyPI</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#python-requirements">🐍 <strong>Python Requirements</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-for-development">🛠️ <strong>Install for Development</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#docker-optional">🐳 <strong>Docker (Optional)</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#network-requirements">⚠️ <strong>Network Requirements</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#testing-the-installation">🧪 <strong>Testing the Installation</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#basic-connection">🔌 <strong>Basic Connection</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#accessing-machine-actions">🎯 <strong>Accessing Machine Actions</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#loading-and-running-a-marking-file">📁 <strong>Loading and Running a Marking File</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#working-with-variables">📝 <strong>Working with Variables</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#managing-files-on-the-machine">📂 <strong>Managing Files on the Machine</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#error-handling">⚠️ <strong>Error Handling</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#thread-safety">🧵 <strong>Thread Safety</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#advanced-usage">📌 <strong>Advanced Usage</strong></a></li>
 </ul>
 </li>
 </ul>
 </div>
+<p>—</p>
+</section>
+<section id="core-architecture">
+<h2>🧠 <strong>Core Architecture</strong><a class="headerlink" href="#core-architecture" title="Link to this heading"></a></h2>
+<p>The library is structured around three main components:</p>
+<ul class="simple">
+<li><p><strong>Gravotech Client (`Gravotech`)</strong>
+- Main entry point for users
+- Manages connection lifecycle
+- Provides access to all actions</p></li>
+<li><p><strong>IPStreamer</strong>
+- Handles low-level TCP/IP communication
+- Ensures thread-safe messaging
+- Implements automatic retries and timeouts</p></li>
+<li><dl class="simple">
+<dt><strong>GraveuseAction</strong></dt><dd><ul>
+<li><p>High-level interface for TL07 commands</p></li>
+<li><dl class="simple">
+<dt>Encapsulates machine instructions such as:</dt><dd><ul>
+<li><p>Loading files (<cite>LD</cite>)</p></li>
+<li><p>Starting marking (<cite>GO</cite>)</p></li>
+<li><p>Reading machine status (<cite>ST</cite>)</p></li>
+<li><p>Managing files (<cite>LS</cite>, <cite>RM</cite>, <cite>PF</cite>)</p></li>
+<li><p>Handling variables (<cite>VG</cite>, <cite>VS</cite>)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>—</p>
+</section>
+<section id="quality-testing">
+<h2>🧪 <strong>Quality &amp; Testing</strong><a class="headerlink" href="#quality-testing" title="Link to this heading"></a></h2>
+<p>This project includes:</p>
+<ul class="simple">
+<li><p>Comprehensive unit tests using pytest</p></li>
+<li><p>Mock-based testing for hardware-independent validation</p></li>
+<li><p>Continuous Integration via GitHub Actions</p></li>
+<li><p>Code formatting enforced with Black</p></li>
+<li><p>Security analysis using Bandit</p></li>
+</ul>
+<p>—</p>
+</section>
+<section id="project-status">
+<h2>📈 <strong>Project Status</strong><a class="headerlink" href="#project-status" title="Link to this heading"></a></h2>
+<p><strong>Active Development</strong></p>
+<p>Current features include:</p>
+<ul class="simple">
+<li><p>Core TL07 command support</p></li>
+<li><p>Robust TCP/IP communication layer</p></li>
+<li><p>Thread-safe design</p></li>
+<li><p>Context manager support (<cite>with Gravotech(…)</cite>)</p></li>
+<li><p>Fully unit-tested architecture</p></li>
+</ul>
+<p>Planned improvements:</p>
+<ul class="simple">
+<li><p>More advanced error handling</p></li>
+<li><p>Higher-level workflow abstractions</p></li>
+<li><p>Async support</p></li>
+<li><p>Expanded documentation and examples</p></li>
+</ul>
+<p>—</p>
+</section>
+<section id="support-contributions">
+<h2>📬 <strong>Support &amp; Contributions</strong><a class="headerlink" href="#support-contributions" title="Link to this heading"></a></h2>
+<p>This project is community-driven.</p>
+<p>You are encouraged to:</p>
+<ul class="simple">
+<li><p>Open issues for bugs or feature requests</p></li>
+<li><p>Submit pull requests with improvements</p></li>
+<li><p>Contribute tests, documentation, or examples</p></li>
+</ul>
+<p>For custom industrial integrations, you may fork the project or extend it according
+to your needs.</p>
+<p>—</p>
+</section>
+<section id="disclaimer">
+<h2>⚠️ <strong>Disclaimer</strong><a class="headerlink" href="#disclaimer" title="Link to this heading"></a></h2>
+<p>This is an unofficial project.
+Gravotech®, TL07®, and related trademarks are the property of their respective owners.</p>
 </section>
 </section>
 
