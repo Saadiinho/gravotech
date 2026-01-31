@@ -16,10 +16,9 @@ are essential.
    This project is not affiliated with, endorsed by, or supported by Gravotech.
    Gravotech®, TL07®, and related trademarks remain the property of their respective owners.
 
----
 
-🚀 **Project Goals**
---------------------
+**Project Goals**
+-----------------
 
 This library aims to:
 
@@ -30,10 +29,9 @@ This library aims to:
 - Enable automated engraving workflows
 - Improve testability and maintainability of industrial codebases
 
----
 
-🎯 **Who is this for?**
------------------------
+**Who is this for?**
+--------------------
 
 This package is primarily intended for:
 
@@ -43,9 +41,9 @@ This package is primarily intended for:
 - System integrators working with MES/ERP systems
 - R&D teams prototyping engraving workflows
 
----
 
-🔧 **What problems does this solve?**
+
+**What problems does this solve?**
 -------------------------------------
 
 Traditional Gravotech integrations often suffer from:
@@ -64,20 +62,19 @@ This library addresses these issues by providing:
 - A test-friendly architecture
 - A reusable foundation for industrial projects
 
----
 
-📦 **Getting Started**
-----------------------
+
+**Getting Started**
+-------------------
 
 If you are new to this library, we recommend following this reading path:
 
 1. **Installation** — Install the package and set up your environment.
 2. **Usage Guide** — Learn the basic concepts and workflow.
 
----
 
-📖 **Documentation**
---------------------
+**Documentation**
+-----------------
 
 .. toctree::
    :maxdepth: 2
@@ -86,10 +83,10 @@ If you are new to this library, we recommend following this reading path:
    installation
    usage
 
----
 
-🧠 **Core Architecture**
-------------------------
+
+**Core Architecture**
+---------------------
 
 The library is structured around three main components:
 
@@ -112,10 +109,10 @@ The library is structured around three main components:
         - Managing files (`LS`, `RM`, `PF`)
         - Handling variables (`VG`, `VS`)
 
----
 
-🧪 **Quality & Testing**
-------------------------
+
+**Quality & Testing**
+---------------------
 
 This project includes:
 
@@ -125,10 +122,10 @@ This project includes:
 - Code formatting enforced with Black
 - Security analysis using Bandit
 
----
 
-📈 **Project Status**
----------------------
+
+**Project Status**
+------------------
 
 **Active Development**
 
@@ -147,10 +144,10 @@ Planned improvements:
 - Async support
 - Expanded documentation and examples
 
----
 
-📬 **Support & Contributions**
-------------------------------
+
+**Support & Contributions**
+---------------------------
 
 This project is community-driven.
 
@@ -163,10 +160,10 @@ You are encouraged to:
 For custom industrial integrations, you may fork the project or extend it according
 to your needs.
 
----
 
-⚠️ **Disclaimer**
-------------------
+
+**Disclaimer**
+---------------
 
 This is an unofficial project.
 Gravotech®, TL07®, and related trademarks are the property of their respective owners.

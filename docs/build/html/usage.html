@@ -19,7 +19,6 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Référence API" href="api.html" />
     <link rel="prev" title="Installation" href="installation.html" /> 
 </head>
 
@@ -46,17 +45,16 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#basic-connection">🔌 <strong>Basic Connection</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#accessing-machine-actions">🎯 <strong>Accessing Machine Actions</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#loading-and-running-a-marking-file">📁 <strong>Loading and Running a Marking File</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#working-with-variables">📝 <strong>Working with Variables</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#managing-files-on-the-machine">📂 <strong>Managing Files on the Machine</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#error-handling">⚠️ <strong>Error Handling</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#thread-safety">🧵 <strong>Thread Safety</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#advanced-usage">📌 <strong>Advanced Usage</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-connection"><strong>Basic Connection</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-machine-actions"><strong>Accessing Machine Actions</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loading-and-running-a-marking-file"><strong>Loading and Running a Marking File</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-variables"><strong>Working with Variables</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#managing-files-on-the-machine"><strong>Managing Files on the Machine</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#error-handling"><strong>Error Handling</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#thread-safety"><strong>Thread Safety</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced-usage"><strong>Advanced Usage</strong></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">Référence API</a></li>
 </ul>
 
         </div>
@@ -86,9 +84,8 @@
   <section id="usage-guide">
 <h1>Usage Guide<a class="headerlink" href="#usage-guide" title="Link to this heading"></a></h1>
 <p>This guide explains how to use the <strong>Gravotech Python (Unofficial)</strong> package in practice.</p>
-<p>—</p>
 <section id="basic-connection">
-<h2>🔌 <strong>Basic Connection</strong><a class="headerlink" href="#basic-connection" title="Link to this heading"></a></h2>
+<h2><strong>Basic Connection</strong><a class="headerlink" href="#basic-connection" title="Link to this heading"></a></h2>
 <p>The main entry point of the library is the <code class="xref py py-class docutils literal notranslate"><span class="pre">gravotech.client.Gravotech</span></code> class.</p>
 <p>You can use it with a context manager:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gravotech.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gravotech</span>
@@ -108,10 +105,9 @@ when exiting it.</p>
 <span class="n">gravotech</span><span class="o">.</span><span class="n">Streamer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>—</p>
 </section>
 <section id="accessing-machine-actions">
-<h2>🎯 <strong>Accessing Machine Actions</strong><a class="headerlink" href="#accessing-machine-actions" title="Link to this heading"></a></h2>
+<h2><strong>Accessing Machine Actions</strong><a class="headerlink" href="#accessing-machine-actions" title="Link to this heading"></a></h2>
 <p>All high-level machine commands are available through:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gravotech</span><span class="o">.</span><span class="n">Actions</span>
 </pre></div>
@@ -121,10 +117,9 @@ when exiting it.</p>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Machine status:&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>—</p>
 </section>
 <section id="loading-and-running-a-marking-file">
-<h2>📁 <strong>Loading and Running a Marking File</strong><a class="headerlink" href="#loading-and-running-a-marking-file" title="Link to this heading"></a></h2>
+<h2><strong>Loading and Running a Marking File</strong><a class="headerlink" href="#loading-and-running-a-marking-file" title="Link to this heading"></a></h2>
 <p>Typical workflow:</p>
 <ol class="arabic simple">
 <li><p>Load a file</p></li>
@@ -143,10 +138,9 @@ when exiting it.</p>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Marking finished with:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>—</p>
 </section>
 <section id="working-with-variables">
-<h2>📝 <strong>Working with Variables</strong><a class="headerlink" href="#working-with-variables" title="Link to this heading"></a></h2>
+<h2><strong>Working with Variables</strong><a class="headerlink" href="#working-with-variables" title="Link to this heading"></a></h2>
 <p>You can set and get variables in the machine.</p>
 <p>Set variable:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gravotech</span><span class="o">.</span><span class="n">Actions</span><span class="o">.</span><span class="n">vs</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;SERIAL-12345&quot;</span><span class="p">)</span>
@@ -157,10 +151,9 @@ when exiting it.</p>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variable 3:&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>—</p>
 </section>
 <section id="managing-files-on-the-machine">
-<h2>📂 <strong>Managing Files on the Machine</strong><a class="headerlink" href="#managing-files-on-the-machine" title="Link to this heading"></a></h2>
+<h2><strong>Managing Files on the Machine</strong><a class="headerlink" href="#managing-files-on-the-machine" title="Link to this heading"></a></h2>
 <p>List files:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">files</span> <span class="o">=</span> <span class="n">gravotech</span><span class="o">.</span><span class="n">Actions</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="s2">&quot;*.t2l&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
@@ -175,10 +168,9 @@ when exiting it.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gravotech</span><span class="o">.</span><span class="n">Actions</span><span class="o">.</span><span class="n">rm</span><span class="p">(</span><span class="s2">&quot;old_file.t2l&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>—</p>
 </section>
 <section id="error-handling">
-<h2>⚠️ <strong>Error Handling</strong><a class="headerlink" href="#error-handling" title="Link to this heading"></a></h2>
+<h2><strong>Error Handling</strong><a class="headerlink" href="#error-handling" title="Link to this heading"></a></h2>
 <p>If the machine returns an error (<cite>ER …</cite>), a <cite>ValueError</cite> will be raised.</p>
 <p>Example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
@@ -188,25 +180,23 @@ when exiting it.</p>
 </pre></div>
 </div>
 <p>For network errors, a <cite>RuntimeError</cite> may be raised.</p>
-<p>—</p>
 </section>
 <section id="thread-safety">
-<h2>🧵 <strong>Thread Safety</strong><a class="headerlink" href="#thread-safety" title="Link to this heading"></a></h2>
+<h2><strong>Thread Safety</strong><a class="headerlink" href="#thread-safety" title="Link to this heading"></a></h2>
 <p>The underlying <cite>IPStreamer</cite> uses a reentrant lock (<cite>RLock</cite>), which means:</p>
 <ul class="simple">
 <li><p>Multiple threads can safely call <cite>gravotech.Actions.*</cite> methods.</p></li>
 <li><p>Long operations like <cite>GO</cite> are automatically synchronized.</p></li>
 </ul>
-<p>—</p>
 </section>
 <section id="advanced-usage">
-<h2>📌 <strong>Advanced Usage</strong><a class="headerlink" href="#advanced-usage" title="Link to this heading"></a></h2>
+<h2><strong>Advanced Usage</strong><a class="headerlink" href="#advanced-usage" title="Link to this heading"></a></h2>
 <p>If you need direct access to low-level communication, you can use:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gravotech</span><span class="o">.</span><span class="n">Streamer</span><span class="o">.</span><span class="n">unsafe_write</span><span class="p">(</span><span class="s2">&quot;ST&quot;</span><span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">gravotech</span><span class="o">.</span><span class="n">Streamer</span><span class="o">.</span><span class="n">unsafe_read</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>⚠️ This is only recommended for advanced users.</p>
+<p>This is only recommended for advanced users.</p>
 </section>
 </section>
 
@@ -215,7 +205,6 @@ when exiting it.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="api.html" class="btn btn-neutral float-right" title="Référence API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

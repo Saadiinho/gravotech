@@ -3,10 +3,10 @@ Usage Guide
 
 This guide explains how to use the **Gravotech Python (Unofficial)** package in practice.
 
----
 
-🔌 **Basic Connection**
------------------------
+
+**Basic Connection**
+--------------------
 
 The main entry point of the library is the :class:`gravotech.client.Gravotech` class.
 
@@ -33,10 +33,10 @@ You can also manage the connection manually:
 
    gravotech.Streamer.close()
 
----
 
-🎯 **Accessing Machine Actions**
---------------------------------
+
+**Accessing Machine Actions**
+-----------------------------
 
 All high-level machine commands are available through:
 
@@ -51,10 +51,10 @@ Example:
    status = gravotech.Actions.st()
    print("Machine status:", status)
 
----
 
-📁 **Loading and Running a Marking File**
------------------------------------------
+
+**Loading and Running a Marking File**
+--------------------------------------
 
 Typical workflow:
 
@@ -75,10 +75,10 @@ Typical workflow:
        result = gravotech.Actions.go()
        print("Marking finished with:", result)
 
----
 
-📝 **Working with Variables**
------------------------------
+
+**Working with Variables**
+--------------------------
 
 You can set and get variables in the machine.
 
@@ -95,10 +95,10 @@ Get variable:
    value = gravotech.Actions.vg(3)
    print("Variable 3:", value)
 
----
 
-📂 **Managing Files on the Machine**
-------------------------------------
+
+**Managing Files on the Machine**
+---------------------------------
 
 List files:
 
@@ -120,10 +120,10 @@ Delete files:
 
    gravotech.Actions.rm("old_file.t2l")
 
----
 
-⚠️ **Error Handling**
-----------------------
+
+**Error Handling**
+-------------------
 
 If the machine returns an error (`ER ...`), a `ValueError` will be raised.
 
@@ -138,20 +138,20 @@ Example:
 
 For network errors, a `RuntimeError` may be raised.
 
----
 
-🧵 **Thread Safety**
---------------------
+
+**Thread Safety**
+-----------------
 
 The underlying `IPStreamer` uses a reentrant lock (`RLock`), which means:
 
 - Multiple threads can safely call `gravotech.Actions.*` methods.
 - Long operations like `GO` are automatically synchronized.
 
----
 
-📌 **Advanced Usage**
----------------------
+
+**Advanced Usage**
+------------------
 
 If you need direct access to low-level communication, you can use:
 
@@ -160,4 +160,4 @@ If you need direct access to low-level communication, you can use:
    gravotech.Streamer.unsafe_write("ST")
    response = gravotech.Streamer.unsafe_read()
 
-⚠️ This is only recommended for advanced users.
+This is only recommended for advanced users.

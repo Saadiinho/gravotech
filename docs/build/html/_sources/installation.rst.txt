@@ -3,10 +3,10 @@ Installation
 
 This section explains how to install and configure the **Gravotech Python (Unofficial)** package.
 
----
 
-📦 **Install from PyPI**
-------------------------
+
+**Install from PyPI**
+---------------------
 
 The recommended way to install the package is via pip:
 
@@ -20,10 +20,10 @@ To verify that the installation was successful, you can run:
 
    python -c "import gravotech; print('Gravotech installed successfully')"
 
----
 
-🐍 **Python Requirements**
---------------------------
+
+**Python Requirements**
+-----------------------
 
 This package requires:
 
@@ -36,10 +36,10 @@ You can check your Python version with:
 
    python --version
 
----
 
-🛠️ **Install for Development**
--------------------------------
+
+**Install for Development**
+----------------------------
 
 If you want to contribute to the project or modify the code, you can clone the repository
 and install it in editable mode:
@@ -56,10 +56,10 @@ If you are using **Poetry**, you can instead run:
 
    poetry install
 
----
 
-🐳 **Docker (Optional)**
-------------------------
+
+**Docker (Optional)**
+---------------------
 
 If your project runs inside Docker, you can add the package to your `requirements.txt`:
 
@@ -73,10 +73,10 @@ Or install it directly in your Dockerfile:
 
    RUN pip install gravotech-tl07
 
----
 
-⚠️ **Network Requirements**
----------------------------
+
+**Network Requirements**
+------------------------
 
 Ensure that:
 
@@ -84,10 +84,10 @@ Ensure that:
 - The correct IP address and port are used (default Gravotech port is usually **55555**).
 - No firewall is blocking the connection.
 
----
 
-🧪 **Testing the Installation**
---------------------------------
+
+**Testing the Installation**
+-----------------------------
 
 You can test a basic connection like this:
 

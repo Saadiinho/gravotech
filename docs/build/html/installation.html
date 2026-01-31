@@ -45,16 +45,15 @@
               <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#install-from-pypi">📦 <strong>Install from PyPI</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#python-requirements">🐍 <strong>Python Requirements</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install-for-development">🛠️ <strong>Install for Development</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#docker-optional">🐳 <strong>Docker (Optional)</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#network-requirements">⚠️ <strong>Network Requirements</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#testing-the-installation">🧪 <strong>Testing the Installation</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-from-pypi"><strong>Install from PyPI</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-requirements"><strong>Python Requirements</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-for-development"><strong>Install for Development</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docker-optional"><strong>Docker (Optional)</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#network-requirements"><strong>Network Requirements</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-the-installation"><strong>Testing the Installation</strong></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">Référence API</a></li>
 </ul>
 
         </div>
@@ -84,9 +83,8 @@
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
 <p>This section explains how to install and configure the <strong>Gravotech Python (Unofficial)</strong> package.</p>
-<p>—</p>
 <section id="install-from-pypi">
-<h2>📦 <strong>Install from PyPI</strong><a class="headerlink" href="#install-from-pypi" title="Link to this heading"></a></h2>
+<h2><strong>Install from PyPI</strong><a class="headerlink" href="#install-from-pypi" title="Link to this heading"></a></h2>
 <p>The recommended way to install the package is via pip:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>gravotech-tl07
 </pre></div>
@@ -95,10 +93,9 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import gravotech; print(&#39;Gravotech installed successfully&#39;)&quot;</span>
 </pre></div>
 </div>
-<p>—</p>
 </section>
 <section id="python-requirements">
-<h2>🐍 <strong>Python Requirements</strong><a class="headerlink" href="#python-requirements" title="Link to this heading"></a></h2>
+<h2><strong>Python Requirements</strong><a class="headerlink" href="#python-requirements" title="Link to this heading"></a></h2>
 <p>This package requires:</p>
 <ul class="simple">
 <li><p>Python <strong>3.8 or newer</strong></p></li>
@@ -108,10 +105,9 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>--version
 </pre></div>
 </div>
-<p>—</p>
 </section>
 <section id="install-for-development">
-<h2>🛠️ <strong>Install for Development</strong><a class="headerlink" href="#install-for-development" title="Link to this heading"></a></h2>
+<h2><strong>Install for Development</strong><a class="headerlink" href="#install-for-development" title="Link to this heading"></a></h2>
 <p>If you want to contribute to the project or modify the code, you can clone the repository
 and install it in editable mode:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-org/gravotech-tl07.git
@@ -123,10 +119,9 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>install
 </pre></div>
 </div>
-<p>—</p>
 </section>
 <section id="docker-optional">
-<h2>🐳 <strong>Docker (Optional)</strong><a class="headerlink" href="#docker-optional" title="Link to this heading"></a></h2>
+<h2><strong>Docker (Optional)</strong><a class="headerlink" href="#docker-optional" title="Link to this heading"></a></h2>
 <p>If your project runs inside Docker, you can add the package to your <cite>requirements.txt</cite>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gravotech-tl07
 </pre></div>
@@ -135,20 +130,18 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
 <div class="highlight-dockerfile notranslate"><div class="highlight"><pre><span></span><span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>gravotech-tl07
 </pre></div>
 </div>
-<p>—</p>
 </section>
 <section id="network-requirements">
-<h2>⚠️ <strong>Network Requirements</strong><a class="headerlink" href="#network-requirements" title="Link to this heading"></a></h2>
+<h2><strong>Network Requirements</strong><a class="headerlink" href="#network-requirements" title="Link to this heading"></a></h2>
 <p>Ensure that:</p>
 <ul class="simple">
 <li><p>Your Gravotech machine is reachable on the network.</p></li>
 <li><p>The correct IP address and port are used (default Gravotech port is usually <strong>55555</strong>).</p></li>
 <li><p>No firewall is blocking the connection.</p></li>
 </ul>
-<p>—</p>
 </section>
 <section id="testing-the-installation">
-<h2>🧪 <strong>Testing the Installation</strong><a class="headerlink" href="#testing-the-installation" title="Link to this heading"></a></h2>
+<h2><strong>Testing the Installation</strong><a class="headerlink" href="#testing-the-installation" title="Link to this heading"></a></h2>
 <p>You can test a basic connection like this:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gravotech.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gravotech</span>
 
