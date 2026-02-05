@@ -2,7 +2,7 @@ name: Documentation
 
 on:
   push:
-    branches: ["main", "develop", "feature/v1-docs"]
+    branches: ["main", "develop"]
   workflow_dispatch:
 
 permissions:
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # ------------------------------------------------------------
-        # Checkout repository
+      # Checkout repository
       # ------------------------------------------------------------
       - name: Checkout code
         uses: actions/checkout@v4
@@ -40,13 +40,26 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-
       # ------------------------------------------------------------
       # Create Documentation
       # ------------------------------------------------------------
       - name: Create documentation with Sphinx
-        run:  |
+        run: |
           make -C docs html
+
+      # ------------------------------------------------------------
+      # Disable Jekyll
+      # ------------------------------------------------------------
+      - name: Disable Jekyll
+        run: touch docs/build/html/.nojekyll
+
+      # ------------------------------------------------------------
+      # Upload artifact
+      # ------------------------------------------------------------
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/build/html
 
   deploy:
     environment:
