@@ -48,20 +48,6 @@ jobs:
         run:  |
           make -C docs html
 
-      # ------------------------------------------------------------
-      # Disable Jekyll (Required for Sphinx _static folders)
-      # ------------------------------------------------------------
-      - name: Disable Jekyll
-        run: touch docs/_build/html/.nojekyll
-
-      # ------------------------------------------------------------
-      # Upload artifact
-      # ------------------------------------------------------------
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs/_build/html
-
   deploy:
     environment:
       name: github-pages
