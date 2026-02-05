@@ -1,4 +1,4 @@
-# Gravotech API
+# Gravotech Python (Unofficial)
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)
 ![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-green?logo=github)
@@ -7,76 +7,165 @@
 
 ---
 
-## 📌 Overview
+## Description
 
-This project provides a simple and reliable way to communicate with **Gravotech laser engraving machines** from your code.  
-It solves the common challenge of integrating industrial engraving equipment into software workflows by offering a clean, thread-safe interface over TCP/IP — with an optional REST API layer for easy integration.
+Gravotech Python (Unofficial) is a Python package designed to communicate with Gravotech engraving machines using the TL07 protocol.
 
-Designed for **any user or developer working with a Gravotech engraver**, this tool bridges the gap between your application logic and the machine’s native M-Command protocol.
+The goal of this library is to simplify integration, standardize exchanges, and automate communication with Gravotech machines, while hiding the complexity of low-level TCP/IP protocols.
 
----
-
-## ✨ Features
-
-- 🔌 **TCP/IP communication** with Gravotech engravers (port `55555`)
-- 🧵 **Thread-safe** socket handling for concurrent use
-- 🌐 **RESTful API** to send commands and monitor status via HTTP
-- 🛠️ Support for core M-Commands (`ST`, `LD`, `GO`, `LS`, etc.)
-- 🐳 Fully **Dockerized** for easy deployment and isolation
-- 🧪 Built-in simulation mode for development (no physical machine required)
+This project is not affiliated with Gravotech and is provided as a community-driven, open-source solution.
 
 ---
 
-## ⚙️ Prerequisites
+## Who is this package for?
 
-Before using this API, ensure you have:
+This package is intended for:
 
-- A **Gravotech laser engraver** connected to your network
-- Your computer and the engraver on the **same local network**
-- **Docker** and **Docker Compose** installed and accessible
-- Network access to the engraver’s IP address (default port: `55555`)
+* Industrial software developers
+
+* Automation engineers
+
+* Manufacturing / methods engineering teams
+
+Anyone who needs to integrate a Gravotech engraving machine into a larger software or industrial system (MES, ERP, production line, automation cell, etc.).
 
 ---
 
-## 🚀 Installation & Usage
+## Problems this package solves
 
-### 1. Configure your environment
+Before using this package, Gravotech integrations often suffer from:
 
-Create a `.env` file at the root of the project:
+* Low-level TCP/IP exchanges that are difficult to manage
 
-```env
-GRAVOTECH_IP=192.168.1.100
-GRAVOTECH_PORT=55555
-```
-Replace GRAVOTECH_IP with your actual engraver's IP address.
+* Very limited abstraction over the TL07 protocol
 
-### 2. Build the Docker image
+* Custom, machine-specific scripts
+
+* Code that is hard to read, hard to test, and hard to maintain
+
+* Tight coupling between business logic and communication logic
+
+This package provides:
+
+* A clean, high-level Python API
+
+* Thread-safe communication
+
+* A clear separation between transport, commands, and business logic
+
+* Testable and maintainable code
+
+* A reusable foundation for industrial projects
+
+---
+
+## Installation
+
+Install the package directly from PyPI:
+
 ```bash
-  make build-api
+    pip install gravotech-tl07
 ```
 
-### 3. Run the API
-```bash
-  make run-api
+## Quick example
+
+```python
+from gravotech.client import Gravotech
+from gravotech.actions.actions import LDMode
+
+with Gravotech("192.168.0.211", 55555) as gravotech:
+    # Load a marking file
+    gravotech.Actions.ld("example.t2l", 1, LDMode.NORMAL)
+
+    # Check machine status
+    status = gravotech.Actions.st()
+    print("Machine status:", status)
+
+    # Start marking
+    result = gravotech.Actions.go()
+    print("Marking result:", result)
 ```
-The REST API will be available at http://127.0.0.1:3001.
 
-💡 Tip: During development, you can use the built-in fake Gravotech server to test without a physical machine.
-```bash
-    make build-server
-    make run-server
-```
+## Concrete use cases
 
-## 📬 Support & Contact
+### 1. Automated production line
+* Integrate a Gravotech engraver into an automated production line to:
 
-This project is maintained by a single developer.
-If you have questions, encounter issues, or need assistance, please contact me by email.
+* Load marking files dynamically
 
-    📩 Maintainer: Saad RAFIQUL
-    ✉️ Email: saad.rafiqul1@gmail.com
+* Set serial numbers or batch information using variables
 
-## 📄 License
+* Trigger marking cycles programmatically
 
-Proprietary – All rights reserved.
-For internal or authorized use only.
+* Monitor machine state and errors
 
+### 2. MES / ERP integration
+
+* Use this package to connect a Gravotech machine to a Manufacturing Execution System:
+
+* Automatic file selection based on production orders
+
+* Traceability through engraved serial numbers
+
+* Centralized error handling and monitoring
+
+### 3. R&D and prototyping
+
+* Quickly prototype engraving workflows:
+
+* Simulate marking sequences
+
+* Test TL07 commands without manual interaction
+
+* Build proof-of-concept integrations
+
+### 4. Maintenance and tooling
+
+* Create internal tools to:
+
+* List, upload, or delete files on the machine
+
+* Diagnose machine status remotely
+
+* Standardize engraving procedures across sites
+
+## Project status
+
+### Active development
+
+* Core TL07 commands implemented
+
+* Thread-safe TCP/IP communication
+
+* Unit-tested architecture
+
+* Continuous Integration in place
+
+### Future improvements may include:
+
+* Extended error handling
+
+* Higher-level workflows
+
+* Async support
+
+* Additional documentation and examples
+
+## Support & Contact
+
+This project is provided as-is, without official support from Gravotech.
+
+However:
+
+* Bug reports and feature requests are welcome via GitHub Issues
+
+* Contributions (PRs, tests, documentation) are encouraged
+
+* The codebase is designed to be readable, testable, and extensible
+
+If you need custom integration, industrial support, or project-specific adaptations, you are encouraged to fork the project or build on top of it
+
+## Disclaimer
+
+This is an unofficial project.
+Gravotech®, TL07®, and related trademarks are the property of their respective owners.
