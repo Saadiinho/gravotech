@@ -2,7 +2,7 @@ name: Documentation
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "develop", "feature/v1-docs"]
   workflow_dispatch:
 
 permissions:
@@ -40,9 +40,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Build de la documentation Sphinx
-        run: |
-          # Adapte le chemin "docs/" si ton dossier s'appelle autrement
+
+      # ------------------------------------------------------------
+      # Create Documentation
+      # ------------------------------------------------------------
+      - name: Create documentation with Sphinx
+        run:  |
           make -C docs html
 
       - name: Désactiver Jekyll (Important pour Sphinx)
