@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # ------------------------------------------------------------
-        # Checkout repository
+      # Checkout repository
       # ------------------------------------------------------------
       - name: Checkout code
         uses: actions/checkout@v4
@@ -40,23 +40,27 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Build de la documentation Sphinx
+      # ------------------------------------------------------------
+      # Create Documentation
+      # ------------------------------------------------------------
+      - name: Create documentation with Sphinx
         run: |
-          # Adapte le chemin "docs/" si ton dossier s'appelle autrement
           make -C docs html
 
-      - name: Désactiver Jekyll (Important pour Sphinx)
-        # GitHub Pages utilise Jekyll par défaut qui ignore les dossiers commençant par "_"
-        # Comme Sphinx génère des dossiers "_static", il faut désactiver Jekyll.
-        run: touch docs/_build/html/.nojekyll
+      # ------------------------------------------------------------
+      # Disable Jekyll
+      # ------------------------------------------------------------
+      - name: Disable Jekyll
+        run: touch docs/build/html/.nojekyll
 
-      - name: Upload de l'artefact
+      # ------------------------------------------------------------
+      # Upload artifact
+      # ------------------------------------------------------------
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Le chemin vers le HTML généré
-          path: docs/_build/html
+          path: docs/build/html
 
-  # Job de déploiement
   deploy:
     environment:
       name: github-pages
@@ -64,6 +68,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Déployer sur GitHub Pages
+      # ------------------------------------------------------------
+      # Deploy to GitHub Pages
+      # ------------------------------------------------------------
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
